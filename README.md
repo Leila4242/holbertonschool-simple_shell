@@ -10,7 +10,7 @@ A simple UNIX command interpreter developed as part of the Low-level programming
 * [Requirements](#requirements)
 * [Installation & Compilation](#installation--compilation)
 * [Usage](#usage)
-* [Project Files](#project-files)
+* [Project Structure](#project Structure)
 * [Authors](#authors)
 
 ---
