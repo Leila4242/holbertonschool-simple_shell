@@ -44,3 +44,16 @@ Clone this repository to your local machine:
 ```bash
 git clone [https://github.com/Leila4242/holbertonschool-simple_shell.git](https://github.com/Leila4242/holbertonschool-simple_shell.git)
 cd holbertonschool-simple_shell
+
+Compile the source code using the following flags:Bashgcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+UsageInteractive ModeRun the executable:Bash$ ./hsh
+($) /bin/ls
+hsh  main.c  shell.c  README.md
+($) exit
+$
+
+Non-Interactive ModeBash$echo "ls -l" | ./hsh$ cat commands.txt | ./hsh
+
+Project FilesFileDescriptionmain.cEntry point of the shell, contains the main loop.shell.hHeader file containing function prototypes and structures.parser.cFunctions to tokenize and parse user input.executor.cHandles fork, execve, and wait logic.path.cLogic for searching commands within the PATH.builtins.cImplementation of exit and env.man_1_simple_shellCustom manual page for the shell.AuthorsYour Name - GitHubPartner Name - GitHub
+---
+
