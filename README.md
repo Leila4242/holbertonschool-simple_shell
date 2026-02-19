@@ -41,19 +41,34 @@ A simple UNIX command interpreter developed as part of the Low-level programming
 
 ## Installation & Compilation
 Clone this repository to your local machine:
-```bash
+Bash
 git clone [https://github.com/Leila4242/holbertonschool-simple_shell.git](https://github.com/Leila4242/holbertonschool-simple_shell.git)
 cd holbertonschool-simple_shell
 
-Compile the source code using the following flags:Bashgcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
-UsageInteractive ModeRun the executable:Bash$ ./hsh
+
+Compile the source code using the following flags:
+Bash
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+
+## Usage
+Interactive Mode
+Run the executable:
+Bash$ ./hsh
 ($) /bin/ls
 hsh  main.c  shell.c  README.md
 ($) exit
 $
 
-Non-Interactive ModeBash$echo "ls -l" | ./hsh$ cat commands.txt | ./hsh
+Non-Interactive ModeBash
+$echo "ls -l" | ./hsh$ cat commands.txt | ./hsh
 
-Project FilesFileDescriptionmain.cEntry point of the shell, contains the main loop.shell.hHeader file containing function prototypes and structures.parser.cFunctions to tokenize and parse user input.executor.cHandles fork, execve, and wait logic.path.cLogic for searching commands within the PATH.builtins.cImplementation of exit and env.man_1_simple_shellCustom manual page for the shell.AuthorsYour Name - GitHubPartner Name - GitHub
+## 📂 Project Structure
+shell.h: The header file containing standard library includes, the extern char **environ declaration, and function prototypes.
+
+main.c: The heart of the shell. Contains the entry point, string parsing logic, and the execution engine.
+
+## Authors
+Leyla Aliyeva - Leila4242
+Anar Aghamaliyev - AnarAghamaliyev
 ---
 

@@ -1,0 +1,64 @@
+.TH HSH 1 "AUGUST 2023" "HSH" "Simple Shell Manual"
+.SH NAME
+hsh \- simple UNIX command interpreter
+.SH SYNOPSIS
+.B hsh
+[file]
+.SH DESCRIPTION
+.B hsh
+is a command language interpreter that executes commands read from a standard input or a file. It is a simplified version of the Thompson shell.
+
+.SS Interactive Mode
+When 
+.B hsh
+is started in interactive mode (connected to a terminal), it displays a prompt 
+.I ($) 
+and waits for the user to enter a command. 
+
+.SS Non-Interactive Mode
+If 
+.B hsh
+is started in non-interactive mode (e.g., via a pipe), it reads commands from the standard input and executes them sequentially without displaying a prompt.
+
+.SH BEYOND THE BASICS
+.TP
+.B Command Execution
+After reading a command, 
+.B hsh
+breaks it into tokens. It then looks for the command in the current PATH. If found, it forks a child process and uses 
+.I execve 
+to run the program.
+.TP
+.B PATH Searching
+If the command does not contain a slash (/), 
+.B hsh
+searches for the command in the directories listed in the PATH environment variable.
+
+.SH BUILT-INS
+The following commands are built into 
+.B hsh:
+.TP
+.B exit
+Terminates the shell.
+.TP
+.B env
+Prints the current environment variables.
+
+.SH EXIT STATUS
+.B hsh
+returns the exit status of the last command executed. If no command was executed, it returns 0. If a command is not found, it returns 127.
+
+.SH EXAMPLES
+To start the shell:
+.IP
+.B ./hsh
+.PP
+To run a command in non-interactive mode:
+.IP
+.B echo "ls -l" | ./hsh
+
+.SH AUTHOR
+This shell was written by [Your Name] and [Partner Name].
+
+.SH SEE ALSO
+sh(1), access(2), execve(2), fork(2), wait(2)
