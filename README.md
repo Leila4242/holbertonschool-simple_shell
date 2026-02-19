@@ -69,6 +69,8 @@ main.c: The heart of the shell. Contains the entry point, string parsing logic, 
 
 ## Authors
 Leyla Aliyeva - Leila4242
+
 Anar Aghamaliyev - AnarAghamaliyev
+
 ---
 
