@@ -94,7 +94,7 @@ char *get_path(char *cmd)
  * @args: Arguments
  * @argv: Main argv for error reporting
  * @count: Command count
- * Return: Status
+ * Return: Exit status
  */
 int execute(char **args, char **argv, int count)
 {
@@ -115,13 +115,16 @@ int execute(char **args, char **argv, int count)
 		if (execve(path, args, environ) == -1)
 		{
 			perror("execve");
-			exit(1);
+			free(path);
+			exit(127);
 		}
 	}
-	else
+	else if (pid > 0)
 	{
-		wait(&status);
+		waitpid(pid, &status, 0);
 		free(path);
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
 	}
 	return (0);
 }
@@ -130,7 +133,7 @@ int execute(char **args, char **argv, int count)
  * main - Entry point for the shell
  * @ac: Arg count
  * @av: Arg vector
- * Return: 0
+ * Return: Exit status of last command
  */
 int main(int ac, char **av)
 {
@@ -138,6 +141,7 @@ int main(int ac, char **av)
 	size_t n = 0;
 	char **args;
 	int count = 0, i;
+	int last_status = 0;
 
 	(void)ac;
 	while (1)
@@ -147,7 +151,7 @@ int main(int ac, char **av)
 		if (getline(&line, &n, stdin) == -1)
 		{
 			free(line);
-			exit(0);
+			exit(last_status);
 		}
 		count++;
 		args = tokenize(line);
@@ -157,7 +161,7 @@ int main(int ac, char **av)
 			{
 				free(line);
 				free_args(args);
-				exit(0);
+				exit(last_status);
 			}
 			if (strcmp(args[0], "env") == 0)
 			{
@@ -165,9 +169,9 @@ int main(int ac, char **av)
 					printf("%s\n", environ[i]);
 			}
 			else
-				execute(args, av, count);
+				last_status = execute(args, av, count);
 		}
 		free_args(args);
 	}
-	return (0);
+	return (last_status);
 }
