@@ -49,13 +49,24 @@ char *get_path(char *cmd)
 {
 	char *path, *path_cp, *tok, *file;
 	struct stat st;
+	int i;
 
-	path = getenv("PATH");
+	path = NULL;
 	if (stat(cmd, &st) == 0)
 		return (strdup(cmd));
+	for (i = 0; environ[i]; i++)
+	{
+		if (strncmp(environ[i], "PATH=", 5) == 0)
+		{
+			path = environ[i] + 5;
+			break;
+		}
+	}
 	if (!path)
 		return (NULL);
 	path_cp = strdup(path);
+	if (!path_cp)
+		return (NULL);
 	tok = strtok(path_cp, ":");
 	while (tok)
 	{
