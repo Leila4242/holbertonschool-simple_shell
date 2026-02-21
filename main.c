@@ -52,8 +52,12 @@ char *get_path(char *cmd)
 	int i;
 
 	path = NULL;
-	if (stat(cmd, &st) == 0)
-		return (strdup(cmd));
+	if (strchr(cmd, '/'))
+	{
+		if (stat(cmd, &st) == 0)
+			return (strdup(cmd));
+		return (NULL);
+	}
 	for (i = 0; environ[i]; i++)
 	{
 		if (strncmp(environ[i], "PATH=", 5) == 0)
@@ -62,7 +66,7 @@ char *get_path(char *cmd)
 			break;
 		}
 	}
-	if (!path)
+	if (!path || path[0] == '\0')
 		return (NULL);
 	path_cp = strdup(path);
 	if (!path_cp)
